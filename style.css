@@ -44,10 +44,17 @@ nav {
   backdrop-filter: blur(12px);
 }
 .nav-logo {
-  font-family: 'Oswald', sans-serif;
-  font-size: 22px; font-weight: 700;
-  letter-spacing: 3px; text-transform: uppercase;
-  color: var(--white); text-decoration: none;
+  display: flex; align-items: center;
+  text-decoration: none;
+}
+.nav-logo img {
+  height: 48px; width: auto;
+  object-fit: contain;
+  filter: drop-shadow(0 0 6px rgba(200,16,46,0.35));
+  transition: filter 0.2s;
+}
+.nav-logo img:hover {
+  filter: drop-shadow(0 0 10px rgba(200,16,46,0.6));
 }
 .nav-logo span { color: var(--red); }
 .nav-links { display: flex; gap: 32px; align-items: center; }
