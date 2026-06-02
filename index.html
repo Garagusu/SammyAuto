@@ -4,16 +4,26 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Sammy's Auto Repair Centre — Ottawa</title>
-  <meta name="description" content="Ottawa's trusted auto repair shop. 4.9★ rated with 489+ reviews. Oil changes, brakes, engine diagnostics, A/C, tires and more." />
+  <meta name="description" content="Ottawa's trusted auto repair shop. 4.9★ rated with 489+ reviews." />
   <link rel="stylesheet" href="style.css" />
   <style>
-    /* ── HERO ── */
+    .lang-toggle {
+      display: flex; gap: 0; border: 1px solid rgba(255,255,255,0.15); overflow: hidden;
+    }
+    .lang-btn {
+      background: none; border: none; border-right: 1px solid rgba(255,255,255,0.15);
+      color: var(--gray); padding: 7px 14px;
+      font-family: 'Barlow Condensed', sans-serif; font-size: 12px; font-weight: 700;
+      letter-spacing: 2px; cursor: pointer; transition: all 0.2s;
+    }
+    .lang-btn:last-child { border-right: none; }
+    .lang-btn.active { background: var(--red); color: white; }
+    .lang-btn:hover:not(.active) { background: rgba(255,255,255,0.06); color: var(--white); }
+
     .hero {
-      min-height: 100vh;
-      display: flex; flex-direction: column;
+      min-height: 100vh; display: flex; flex-direction: column;
       justify-content: center; align-items: flex-start;
-      padding: 140px 48px 100px;
-      position: relative; overflow: hidden;
+      padding: 140px 48px 100px; position: relative; overflow: hidden;
     }
     .hero-bg {
       position: absolute; inset: 0;
@@ -24,119 +34,68 @@
         var(--black);
     }
     .hero-line {
-      position: absolute; top: 0; bottom: 0;
-      right: 40%; width: 2px;
+      position: absolute; top: 0; bottom: 0; right: 40%; width: 2px;
       background: linear-gradient(to bottom, transparent 0%, var(--red) 40%, var(--red) 60%, transparent 100%);
       opacity: 0.5;
     }
     .hero-badge {
-      font-family: 'Barlow Condensed', sans-serif;
-      font-size: 11px; font-weight: 700;
+      font-family: 'Barlow Condensed', sans-serif; font-size: 11px; font-weight: 700;
       letter-spacing: 4px; text-transform: uppercase;
       color: var(--red); border: 1px solid var(--red);
-      padding: 6px 16px; display: inline-block;
-      margin-bottom: 28px; position: relative;
+      padding: 6px 16px; display: inline-block; margin-bottom: 28px; position: relative;
     }
     .hero h1 {
       font-family: 'Oswald', sans-serif;
-      font-size: clamp(58px, 8.5vw, 100px);
-      font-weight: 700; line-height: 0.93;
-      letter-spacing: -1px; text-transform: uppercase;
+      font-size: clamp(58px, 8.5vw, 100px); font-weight: 700;
+      line-height: 0.93; letter-spacing: -1px; text-transform: uppercase;
       margin-bottom: 10px; position: relative;
     }
-    .hero h1 .outline {
-      -webkit-text-stroke: 2px rgba(192,192,192,0.6);
-      color: transparent;
-    }
+    .hero h1 .outline { -webkit-text-stroke: 2px rgba(192,192,192,0.6); color: transparent; }
     .hero-sub {
-      font-family: 'Barlow Condensed', sans-serif;
-      font-size: 26px; font-weight: 300;
+      font-family: 'Barlow Condensed', sans-serif; font-size: 26px; font-weight: 300;
       letter-spacing: 9px; text-transform: uppercase;
       color: var(--silver); margin-bottom: 40px; position: relative;
     }
     .hero-desc {
-      font-size: 16px; font-weight: 300;
-      color: rgba(245,245,245,0.55); line-height: 1.75;
-      max-width: 430px; margin-bottom: 48px; position: relative;
+      font-size: 16px; font-weight: 300; color: rgba(245,245,245,0.55);
+      line-height: 1.75; max-width: 430px; margin-bottom: 48px; position: relative;
     }
     .hero-actions { display: flex; gap: 16px; align-items: center; position: relative; }
-
-    /* Stats panel */
     .hero-stats {
       position: absolute; right: 48px; bottom: 100px;
       display: flex; flex-direction: column; gap: 36px; align-items: flex-end;
     }
     .stat { text-align: right; }
-    .stat-num {
-      font-family: 'Oswald', sans-serif;
-      font-size: 50px; font-weight: 700;
-      color: var(--white); line-height: 1;
-    }
+    .stat-num { font-family: 'Oswald', sans-serif; font-size: 50px; font-weight: 700; color: var(--white); line-height: 1; }
     .stat-num sup { color: var(--red); font-size: 28px; }
-    .stat-label {
-      font-family: 'Barlow Condensed', sans-serif;
-      font-size: 11px; letter-spacing: 3px;
-      text-transform: uppercase; color: var(--gray);
-    }
+    .stat-label { font-family: 'Barlow Condensed', sans-serif; font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: var(--gray); }
     .stat-line { width: 36px; height: 2px; background: var(--red); margin-left: auto; margin-top: 8px; }
 
-    /* ── SERVICES ── */
     .services-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
-      gap: 1px;
-      background: rgba(255,255,255,0.07);
-      border: 1px solid rgba(255,255,255,0.07);
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+      gap: 1px; background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.07);
     }
     .service-card {
-      background: var(--dark);
-      padding: 30px 26px;
-      position: relative; overflow: hidden;
-      transition: background 0.25s;
+      background: var(--dark); padding: 30px 26px;
+      position: relative; overflow: hidden; transition: background 0.25s;
     }
     .service-card::after {
-      content: ''; position: absolute;
-      bottom: 0; left: 0; right: 0;
-      height: 2px; width: 0;
-      background: var(--red);
-      transition: width 0.35s ease;
+      content: ''; position: absolute; bottom: 0; left: 0; right: 0;
+      height: 2px; width: 0; background: var(--red); transition: width 0.35s ease;
     }
     .service-card:hover { background: #1c1c1c; }
     .service-card:hover::after { width: 100%; }
     .service-icon { font-size: 26px; display: block; margin-bottom: 14px; }
-    .service-name {
-      font-family: 'Barlow Condensed', sans-serif;
-      font-size: 17px; font-weight: 600;
-      color: var(--white); margin-bottom: 8px;
-    }
+    .service-name { font-family: 'Barlow Condensed', sans-serif; font-size: 17px; font-weight: 600; color: var(--white); margin-bottom: 8px; }
     .service-desc { font-size: 13px; color: var(--gray); line-height: 1.6; }
-    .service-num {
-      position: absolute; top: 18px; right: 18px;
-      font-family: 'Oswald', sans-serif; font-size: 38px; font-weight: 700;
-      color: rgba(255,255,255,0.04);
-    }
+    .service-num { position: absolute; top: 18px; right: 18px; font-family: 'Oswald', sans-serif; font-size: 38px; font-weight: 700; color: rgba(255,255,255,0.04); }
 
-    /* ── WHY US ── */
     .why-section { background: var(--dark); }
     .why-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
     .why-visual { position: relative; height: 440px; }
-    .why-box-bg {
-      position: absolute; top: 0; left: 0;
-      width: 78%; height: 78%;
-      background: var(--dark2); border: 1px solid rgba(255,255,255,0.06);
-    }
-    .why-ghost-text {
-      position: absolute; top: 36px; left: 36px;
-      font-family: 'Oswald', sans-serif; font-size: 54px; font-weight: 700;
-      color: rgba(255,255,255,0.04); text-transform: uppercase; line-height: 1;
-    }
-    .why-box-red {
-      position: absolute; bottom: 0; right: 0;
-      width: 52%; height: 52%;
-      background: var(--red);
-      display: flex; flex-direction: column;
-      justify-content: center; align-items: center; text-align: center; padding: 24px;
-    }
+    .why-box-bg { position: absolute; top: 0; left: 0; width: 78%; height: 78%; background: var(--dark2); border: 1px solid rgba(255,255,255,0.06); }
+    .why-ghost-text { position: absolute; top: 36px; left: 36px; font-family: 'Oswald', sans-serif; font-size: 54px; font-weight: 700; color: rgba(255,255,255,0.04); text-transform: uppercase; line-height: 1; }
+    .why-box-red { position: absolute; bottom: 0; right: 0; width: 52%; height: 52%; background: var(--red); display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 24px; }
     .why-box-red .big { font-family: 'Oswald', sans-serif; font-size: 54px; font-weight: 700; color: white; line-height: 1; }
     .why-box-red .lbl { font-family: 'Barlow Condensed', sans-serif; font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: rgba(255,255,255,0.7); margin-top: 6px; }
     .why-box-red .divider { width: 36px; height: 1px; background: rgba(255,255,255,0.4); margin: 12px auto; }
@@ -146,7 +105,6 @@
     .why-title { font-family: 'Barlow Condensed', sans-serif; font-size: 18px; font-weight: 600; color: var(--white); margin-bottom: 5px; }
     .why-body { font-size: 14px; color: var(--gray); line-height: 1.65; }
 
-    /* ── REVIEWS ── */
     .reviews-section { background: var(--dark); }
     .reviews-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 48px; }
     .rating-block { display: flex; align-items: baseline; gap: 14px; }
@@ -154,47 +112,20 @@
     .rating-stars { color: var(--warning); font-size: 22px; letter-spacing: 3px; }
     .rating-count { font-size: 13px; color: var(--gray); margin-top: 4px; }
     .reviews-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 24px; }
-    .review-card {
-      background: var(--dark2); border: 1px solid rgba(255,255,255,0.07);
-      padding: 28px; position: relative;
-    }
-    .review-card::before {
-      content: '"'; position: absolute; top: 14px; right: 18px;
-      font-family: 'Oswald', sans-serif; font-size: 76px; font-weight: 700;
-      color: rgba(200,16,46,0.12); line-height: 1;
-    }
+    .review-card { background: var(--dark2); border: 1px solid rgba(255,255,255,0.07); padding: 28px; position: relative; }
+    .review-card::before { content: '"'; position: absolute; top: 14px; right: 18px; font-family: 'Oswald', sans-serif; font-size: 76px; font-weight: 700; color: rgba(200,16,46,0.12); line-height: 1; }
     .review-stars { color: var(--warning); font-size: 14px; margin-bottom: 12px; }
     .review-text { font-size: 14px; color: rgba(245,245,245,0.65); line-height: 1.75; margin-bottom: 20px; }
     .review-author { display: flex; align-items: center; gap: 12px; }
-    .review-avatar {
-      width: 38px; height: 38px; border-radius: 50%;
-      background: var(--red);
-      display: flex; align-items: center; justify-content: center;
-      font-family: 'Oswald', sans-serif; font-size: 13px; font-weight: 700; color: white;
-    }
+    .review-avatar { width: 38px; height: 38px; border-radius: 50%; background: var(--red); display: flex; align-items: center; justify-content: center; font-family: 'Oswald', sans-serif; font-size: 13px; font-weight: 700; color: white; }
     .review-name { font-family: 'Barlow Condensed', sans-serif; font-size: 15px; font-weight: 600; color: var(--white); }
     .review-date { font-size: 12px; color: var(--gray); }
 
-    /* ── CTA ── */
-    .cta-section {
-      padding: 110px 48px; text-align: center; position: relative; overflow: hidden;
-    }
-    .cta-glow {
-      position: absolute; inset: 0;
-      background: radial-gradient(ellipse 55% 70% at 50% 50%, rgba(200,16,46,0.13) 0%, transparent 70%);
-    }
-    .cta-section h2 {
-      font-family: 'Oswald', sans-serif;
-      font-size: clamp(38px, 6vw, 72px); font-weight: 700;
-      text-transform: uppercase; line-height: 1; margin-bottom: 18px; position: relative;
-    }
+    .cta-section { padding: 110px 48px; text-align: center; position: relative; overflow: hidden; }
+    .cta-glow { position: absolute; inset: 0; background: radial-gradient(ellipse 55% 70% at 50% 50%, rgba(200,16,46,0.13) 0%, transparent 70%); }
+    .cta-section h2 { font-family: 'Oswald', sans-serif; font-size: clamp(38px, 6vw, 72px); font-weight: 700; text-transform: uppercase; line-height: 1; margin-bottom: 18px; position: relative; }
     .cta-section p { font-size: 16px; color: var(--gray); margin-bottom: 36px; position: relative; }
-    .phone-cta {
-      font-family: 'Oswald', sans-serif; font-size: 38px; font-weight: 700;
-      color: var(--red); text-decoration: none; letter-spacing: 3px;
-      display: block; margin-bottom: 36px; position: relative;
-      transition: color 0.2s;
-    }
+    .phone-cta { font-family: 'Oswald', sans-serif; font-size: 38px; font-weight: 700; color: var(--red); text-decoration: none; letter-spacing: 3px; display: block; margin-bottom: 36px; position: relative; transition: color 0.2s; }
     .phone-cta:hover { color: var(--white); }
     .cta-btns { display: flex; gap: 20px; justify-content: center; position: relative; }
     .cta-address { margin-top: 48px; font-size: 13px; color: var(--gray); letter-spacing: 1px; position: relative; }
@@ -202,15 +133,18 @@
 </head>
 <body>
 
-<!-- NAV -->
 <nav>
   <a href="index.html" class="nav-logo"><img src="logo.png" alt="Sammy's Auto Repair Centre" /></a>
   <div class="nav-links">
-    <a href="index.html" class="active">Home</a>
-    <a href="#services">Services</a>
-    <a href="#reviews">Reviews</a>
-    <a href="booking.html">Book Online</a>
-    <a href="tel:+16133276181" class="nav-cta">☎ Call Now</a>
+    <a href="index.html" class="active" data-en="Home" data-fr="Accueil">Home</a>
+    <a href="#services" data-en="Services" data-fr="Services">Services</a>
+    <a href="#reviews" data-en="Reviews" data-fr="Avis">Reviews</a>
+    <a href="booking.html" data-en="Book Online" data-fr="Réserver">Book Online</a>
+    <div class="lang-toggle">
+      <button class="lang-btn active" onclick="setLang('en')">EN</button>
+      <button class="lang-btn" onclick="setLang('fr')">FR</button>
+    </div>
+    <a href="tel:+16133276181" class="nav-cta" data-en="☎ Call Now" data-fr="☎ Appelez">☎ Call Now</a>
   </div>
 </nav>
 
@@ -219,33 +153,29 @@
   <div class="hero-bg"></div>
   <div class="hero-line"></div>
   <div style="position:relative;">
-    <div class="hero-badge">Ottawa's Most Trusted Auto Repair — 4.9 ★</div>
-    <h1>
-      SAMMY'S<br>
-      <span class="outline">AUTO</span><br>
-      REPAIR
-    </h1>
-    <div class="hero-sub">Centre · Ottawa, ON</div>
-    <p class="hero-desc">Expert diagnostics, honest pricing, and quality repairs — from routine oil changes to full engine overhauls. Your car is in good hands.</p>
+    <div class="hero-badge" data-en="Ottawa's Most Trusted Auto Repair — 4.9 ★" data-fr="Le centre auto le plus fiable à Ottawa — 4.9 ★">Ottawa's Most Trusted Auto Repair — 4.9 ★</div>
+    <h1>SAMMY'S<br><span class="outline">AUTO</span><br>REPAIR</h1>
+    <div class="hero-sub" data-en="Centre · Ottawa, ON" data-fr="Centre · Ottawa, ON">Centre · Ottawa, ON</div>
+    <p class="hero-desc" data-en="Expert diagnostics, honest pricing, and quality repairs — from routine oil changes to full engine overhauls. Your car is in good hands." data-fr="Diagnostics experts, prix honnêtes et réparations de qualité — des vidanges d'huile aux révisions complètes du moteur. Votre voiture est entre de bonnes mains.">Expert diagnostics, honest pricing, and quality repairs — from routine oil changes to full engine overhauls. Your car is in good hands.</p>
     <div class="hero-actions">
-      <a href="booking.html" class="btn-primary">Book Appointment</a>
-      <a href="#services" class="btn-secondary">View Services</a>
+      <a href="booking.html" class="btn-primary" data-en="Book Appointment" data-fr="Prendre Rendez-vous">Book Appointment</a>
+      <a href="#services" class="btn-secondary" data-en="View Services" data-fr="Voir les Services">View Services</a>
     </div>
   </div>
   <div class="hero-stats">
     <div class="stat">
       <div class="stat-num">4.9<sup>★</sup></div>
-      <div class="stat-label">Google Rating</div>
+      <div class="stat-label" data-en="Google Rating" data-fr="Note Google">Google Rating</div>
       <div class="stat-line"></div>
     </div>
     <div class="stat">
       <div class="stat-num">489<sup>+</sup></div>
-      <div class="stat-label">Verified Reviews</div>
+      <div class="stat-label" data-en="Verified Reviews" data-fr="Avis vérifiés">Verified Reviews</div>
       <div class="stat-line"></div>
     </div>
     <div class="stat">
       <div class="stat-num">30<sup>+</sup></div>
-      <div class="stat-label">Services Offered</div>
+      <div class="stat-label" data-en="Services Offered" data-fr="Services offerts">Services Offered</div>
       <div class="stat-line"></div>
     </div>
   </div>
@@ -253,51 +183,50 @@
 
 <!-- MARQUEE -->
 <div class="marquee-strip">
-  <div class="marquee-inner">
-    <span class="marquee-item">Oil Change</span><span class="marquee-dot">✦</span>
-    <span class="marquee-item">Brake Service</span><span class="marquee-dot">✦</span>
-    <span class="marquee-item">Engine Diagnostics</span><span class="marquee-dot">✦</span>
-    <span class="marquee-item">A/C &amp; Heating</span><span class="marquee-dot">✦</span>
-    <span class="marquee-item">Tire Rotation</span><span class="marquee-dot">✦</span>
-    <span class="marquee-item">Transmission</span><span class="marquee-dot">✦</span>
-    <span class="marquee-item">Electrical Repair</span><span class="marquee-dot">✦</span>
-    <span class="marquee-item">Wheel Alignment</span><span class="marquee-dot">✦</span>
-    <span class="marquee-item">Exhaust Systems</span><span class="marquee-dot">✦</span>
-    <span class="marquee-item">Safety Inspection</span><span class="marquee-dot">✦</span>
-    <!-- duplicate for seamless loop -->
-    <span class="marquee-item">Oil Change</span><span class="marquee-dot">✦</span>
-    <span class="marquee-item">Brake Service</span><span class="marquee-dot">✦</span>
-    <span class="marquee-item">Engine Diagnostics</span><span class="marquee-dot">✦</span>
-    <span class="marquee-item">A/C &amp; Heating</span><span class="marquee-dot">✦</span>
-    <span class="marquee-item">Tire Rotation</span><span class="marquee-dot">✦</span>
-    <span class="marquee-item">Transmission</span><span class="marquee-dot">✦</span>
-    <span class="marquee-item">Electrical Repair</span><span class="marquee-dot">✦</span>
-    <span class="marquee-item">Wheel Alignment</span><span class="marquee-dot">✦</span>
-    <span class="marquee-item">Exhaust Systems</span><span class="marquee-dot">✦</span>
-    <span class="marquee-item">Safety Inspection</span><span class="marquee-dot">✦</span>
+  <div class="marquee-inner" id="marquee-inner">
+    <span class="marquee-item" data-en="Oil Change" data-fr="Vidange d'huile">Oil Change</span><span class="marquee-dot">✦</span>
+    <span class="marquee-item" data-en="Brake Service" data-fr="Service de freins">Brake Service</span><span class="marquee-dot">✦</span>
+    <span class="marquee-item" data-en="Engine Diagnostics" data-fr="Diagnostic moteur">Engine Diagnostics</span><span class="marquee-dot">✦</span>
+    <span class="marquee-item" data-en="A/C &amp; Heating" data-fr="Climatisation">A/C &amp; Heating</span><span class="marquee-dot">✦</span>
+    <span class="marquee-item" data-en="Tire Rotation" data-fr="Rotation des pneus">Tire Rotation</span><span class="marquee-dot">✦</span>
+    <span class="marquee-item" data-en="Transmission" data-fr="Transmission">Transmission</span><span class="marquee-dot">✦</span>
+    <span class="marquee-item" data-en="Electrical Repair" data-fr="Réparation électrique">Electrical Repair</span><span class="marquee-dot">✦</span>
+    <span class="marquee-item" data-en="Wheel Alignment" data-fr="Alignement des roues">Wheel Alignment</span><span class="marquee-dot">✦</span>
+    <span class="marquee-item" data-en="Exhaust Systems" data-fr="Systèmes d'échappement">Exhaust Systems</span><span class="marquee-dot">✦</span>
+    <span class="marquee-item" data-en="Safety Inspection" data-fr="Inspection de sécurité">Safety Inspection</span><span class="marquee-dot">✦</span>
+    <span class="marquee-item" data-en="Oil Change" data-fr="Vidange d'huile">Oil Change</span><span class="marquee-dot">✦</span>
+    <span class="marquee-item" data-en="Brake Service" data-fr="Service de freins">Brake Service</span><span class="marquee-dot">✦</span>
+    <span class="marquee-item" data-en="Engine Diagnostics" data-fr="Diagnostic moteur">Engine Diagnostics</span><span class="marquee-dot">✦</span>
+    <span class="marquee-item" data-en="A/C &amp; Heating" data-fr="Climatisation">A/C &amp; Heating</span><span class="marquee-dot">✦</span>
+    <span class="marquee-item" data-en="Tire Rotation" data-fr="Rotation des pneus">Tire Rotation</span><span class="marquee-dot">✦</span>
+    <span class="marquee-item" data-en="Transmission" data-fr="Transmission">Transmission</span><span class="marquee-dot">✦</span>
+    <span class="marquee-item" data-en="Electrical Repair" data-fr="Réparation électrique">Electrical Repair</span><span class="marquee-dot">✦</span>
+    <span class="marquee-item" data-en="Wheel Alignment" data-fr="Alignement des roues">Wheel Alignment</span><span class="marquee-dot">✦</span>
+    <span class="marquee-item" data-en="Exhaust Systems" data-fr="Systèmes d'échappement">Exhaust Systems</span><span class="marquee-dot">✦</span>
+    <span class="marquee-item" data-en="Safety Inspection" data-fr="Inspection de sécurité">Safety Inspection</span><span class="marquee-dot">✦</span>
   </div>
 </div>
 
 <!-- SERVICES -->
 <section class="section" id="services">
-  <div class="section-label">What We Do</div>
-  <div class="section-title">Our <span class="dim">Services</span></div>
+  <div class="section-label" data-en="What We Do" data-fr="Ce que nous faisons">What We Do</div>
+  <div class="section-title">Our <span class="dim" data-en="Services" data-fr="Services">Services</span></div>
   <div class="services-grid">
-    <div class="service-card"><span class="service-num">01</span><span class="service-icon">🔧</span><div class="service-name">Engine Diagnostics</div><div class="service-desc">Advanced OBD-II diagnostics to pinpoint engine issues fast and accurately.</div></div>
-    <div class="service-card"><span class="service-num">02</span><span class="service-icon">🛢️</span><div class="service-name">Oil Change</div><div class="service-desc">Full synthetic, semi-synthetic, or conventional. Filter replaced every time.</div></div>
-    <div class="service-card"><span class="service-num">03</span><span class="service-icon">🔵</span><div class="service-name">Brake Service</div><div class="service-desc">Pads, rotors, calipers, and brake fluid — full inspection and replacement.</div></div>
-    <div class="service-card"><span class="service-num">04</span><span class="service-icon">❄️</span><div class="service-name">A/C &amp; Heating</div><div class="service-desc">Refrigerant recharge, leak repair, compressor and blower service.</div></div>
-    <div class="service-card"><span class="service-num">05</span><span class="service-icon">🔋</span><div class="service-name">Battery &amp; Electrical</div><div class="service-desc">Battery testing and replacement, alternator, starter, full electrical diagnostics.</div></div>
-    <div class="service-card"><span class="service-num">06</span><span class="service-icon">⚙️</span><div class="service-name">Transmission</div><div class="service-desc">Automatic and manual transmission service, fluid changes, and full rebuilds.</div></div>
-    <div class="service-card"><span class="service-num">07</span><span class="service-icon">🚗</span><div class="service-name">Steering &amp; Suspension</div><div class="service-desc">Shocks, struts, tie rods, ball joints, control arms, and alignment.</div></div>
-    <div class="service-card"><span class="service-num">08</span><span class="service-icon">💨</span><div class="service-name">Exhaust Systems</div><div class="service-desc">Muffler repair and replacement, catalytic converter, full exhaust fabrication.</div></div>
-    <div class="service-card"><span class="service-num">09</span><span class="service-icon">🛞</span><div class="service-name">Tires &amp; Alignment</div><div class="service-desc">Tire changeover, rotation, balancing, and computerized 4-wheel alignment.</div></div>
-    <div class="service-card"><span class="service-num">10</span><span class="service-icon">🔍</span><div class="service-name">Safety Inspection</div><div class="service-desc">Ontario motor vehicle inspection for roadworthiness certification.</div></div>
-    <div class="service-card"><span class="service-num">11</span><span class="service-icon">💧</span><div class="service-name">Coolant &amp; Leak Repair</div><div class="service-desc">Radiator flush, coolant replacement, and all coolant system leak repairs.</div></div>
-    <div class="service-card"><span class="service-num">12</span><span class="service-icon">🪟</span><div class="service-name">Filters &amp; Wipers</div><div class="service-desc">Air filter, cabin filter, fuel filter replacement, and wiper blade installation.</div></div>
+    <div class="service-card"><span class="service-num">01</span><span class="service-icon">🔧</span><div class="service-name" data-en="Engine Diagnostics" data-fr="Diagnostic moteur">Engine Diagnostics</div><div class="service-desc" data-en="Advanced OBD-II diagnostics to pinpoint engine issues fast and accurately." data-fr="Diagnostic OBD-II avancé pour identifier rapidement et précisément les problèmes moteur.">Advanced OBD-II diagnostics to pinpoint engine issues fast and accurately.</div></div>
+    <div class="service-card"><span class="service-num">02</span><span class="service-icon">🛢️</span><div class="service-name" data-en="Oil Change" data-fr="Vidange d'huile">Oil Change</div><div class="service-desc" data-en="Full synthetic, semi-synthetic, or conventional. Filter replaced every time." data-fr="Huile synthétique, semi-synthétique ou conventionnelle. Filtre remplacé à chaque fois.">Full synthetic, semi-synthetic, or conventional. Filter replaced every time.</div></div>
+    <div class="service-card"><span class="service-num">03</span><span class="service-icon">🔵</span><div class="service-name" data-en="Brake Service" data-fr="Service de freins">Brake Service</div><div class="service-desc" data-en="Pads, rotors, calipers, and brake fluid — full inspection and replacement." data-fr="Plaquettes, disques, étriers et liquide de frein — inspection et remplacement complets.">Pads, rotors, calipers, and brake fluid — full inspection and replacement.</div></div>
+    <div class="service-card"><span class="service-num">04</span><span class="service-icon">❄️</span><div class="service-name" data-en="A/C &amp; Heating" data-fr="Climatisation &amp; Chauffage">A/C &amp; Heating</div><div class="service-desc" data-en="Refrigerant recharge, leak repair, compressor and blower service." data-fr="Recharge de réfrigérant, réparation de fuites, compresseur et soufflante.">Refrigerant recharge, leak repair, compressor and blower service.</div></div>
+    <div class="service-card"><span class="service-num">05</span><span class="service-icon">🔋</span><div class="service-name" data-en="Battery &amp; Electrical" data-fr="Batterie &amp; Électrique">Battery &amp; Electrical</div><div class="service-desc" data-en="Battery testing and replacement, alternator, starter, full electrical diagnostics." data-fr="Test et remplacement de batterie, alternateur, démarreur, diagnostic électrique complet.">Battery testing and replacement, alternator, starter, full electrical diagnostics.</div></div>
+    <div class="service-card"><span class="service-num">06</span><span class="service-icon">⚙️</span><div class="service-name" data-en="Transmission" data-fr="Transmission">Transmission</div><div class="service-desc" data-en="Automatic and manual transmission service, fluid changes, and full rebuilds." data-fr="Entretien de transmission automatique et manuelle, vidange et reconstruction complète.">Automatic and manual transmission service, fluid changes, and full rebuilds.</div></div>
+    <div class="service-card"><span class="service-num">07</span><span class="service-icon">🚗</span><div class="service-name" data-en="Steering &amp; Suspension" data-fr="Direction &amp; Suspension">Steering &amp; Suspension</div><div class="service-desc" data-en="Shocks, struts, tie rods, ball joints, control arms, and alignment." data-fr="Amortisseurs, jambes de force, biellettes, rotules, bras de suspension et alignement.">Shocks, struts, tie rods, ball joints, control arms, and alignment.</div></div>
+    <div class="service-card"><span class="service-num">08</span><span class="service-icon">💨</span><div class="service-name" data-en="Exhaust Systems" data-fr="Système d'échappement">Exhaust Systems</div><div class="service-desc" data-en="Muffler repair and replacement, catalytic converter, full exhaust fabrication." data-fr="Réparation et remplacement du silencieux, convertisseur catalytique, fabrication d'échappement.">Muffler repair and replacement, catalytic converter, full exhaust fabrication.</div></div>
+    <div class="service-card"><span class="service-num">09</span><span class="service-icon">🛞</span><div class="service-name" data-en="Tires &amp; Alignment" data-fr="Pneus &amp; Alignement">Tires &amp; Alignment</div><div class="service-desc" data-en="Tire changeover, rotation, balancing, and computerized 4-wheel alignment." data-fr="Changement, rotation, équilibrage de pneus et alignement 4 roues informatisé.">Tire changeover, rotation, balancing, and computerized 4-wheel alignment.</div></div>
+    <div class="service-card"><span class="service-num">10</span><span class="service-icon">🔍</span><div class="service-name" data-en="Safety Inspection" data-fr="Inspection de sécurité">Safety Inspection</div><div class="service-desc" data-en="Ontario motor vehicle inspection for roadworthiness certification." data-fr="Inspection du véhicule à moteur de l'Ontario pour la certification de navigabilité routière.">Ontario motor vehicle inspection for roadworthiness certification.</div></div>
+    <div class="service-card"><span class="service-num">11</span><span class="service-icon">💧</span><div class="service-name" data-en="Coolant &amp; Leak Repair" data-fr="Liquide de refroidissement">Coolant &amp; Leak Repair</div><div class="service-desc" data-en="Radiator flush, coolant replacement, and all coolant system leak repairs." data-fr="Rinçage du radiateur, remplacement du liquide de refroidissement et réparation de fuites.">Radiator flush, coolant replacement, and all coolant system leak repairs.</div></div>
+    <div class="service-card"><span class="service-num">12</span><span class="service-icon">🪟</span><div class="service-name" data-en="Filters &amp; Wipers" data-fr="Filtres &amp; Essuie-glaces">Filters &amp; Wipers</div><div class="service-desc" data-en="Air filter, cabin filter, fuel filter replacement, and wiper blade installation." data-fr="Remplacement du filtre à air, filtre d'habitacle, filtre à carburant et installation d'essuie-glaces.">Air filter, cabin filter, fuel filter replacement, and wiper blade installation.</div></div>
   </div>
   <div style="text-align:center; margin-top:40px;">
-    <a href="booking.html" class="btn-primary">Book Any Service</a>
+    <a href="booking.html" class="btn-primary" data-en="Book Any Service" data-fr="Réserver un service">Book Any Service</a>
   </div>
 </section>
 
@@ -305,36 +234,48 @@
 <section class="section why-section" id="about">
   <div class="why-grid">
     <div>
-      <div class="section-label">Why Choose Sammy's</div>
-      <div class="section-title" style="margin-bottom:40px;">Built on <span class="dim">Trust</span></div>
+      <div class="section-label" data-en="Why Choose Sammy's" data-fr="Pourquoi choisir Sammy's">Why Choose Sammy's</div>
+      <div class="section-title" style="margin-bottom:40px;" data-en="Built on <span class='dim'>Trust</span>" data-fr="Fondé sur la <span class='dim'>Confiance</span>">Built on <span class="dim">Trust</span></div>
       <div class="why-points">
         <div class="why-point">
           <div class="why-num">01</div>
-          <div><div class="why-title">Certified Technicians</div><div class="why-body">Our mechanics hold industry certifications and train continuously on the latest vehicles — from classic engines to modern EVs.</div></div>
+          <div>
+            <div class="why-title" data-en="Certified Technicians" data-fr="Techniciens certifiés">Certified Technicians</div>
+            <div class="why-body" data-en="Our mechanics hold industry certifications and train continuously on the latest vehicles — from classic engines to modern EVs." data-fr="Nos mécaniciens détiennent des certifications professionnelles et se forment continuellement sur les derniers véhicules — des moteurs classiques aux VE modernes.">Our mechanics hold industry certifications and train continuously on the latest vehicles — from classic engines to modern EVs.</div>
+          </div>
         </div>
         <div class="why-point">
           <div class="why-num">02</div>
-          <div><div class="why-title">Transparent Pricing</div><div class="why-body">No surprises. We provide clear written estimates before work begins and explain every line item in plain language.</div></div>
+          <div>
+            <div class="why-title" data-en="Transparent Pricing" data-fr="Prix transparents">Transparent Pricing</div>
+            <div class="why-body" data-en="No surprises. We provide clear written estimates before work begins and explain every line item in plain language." data-fr="Pas de mauvaises surprises. Nous fournissons des estimations écrites claires avant de commencer et expliquons chaque élément en langage simple.">No surprises. We provide clear written estimates before work begins and explain every line item in plain language.</div>
+          </div>
         </div>
         <div class="why-point">
           <div class="why-num">03</div>
-          <div><div class="why-title">Same-Day Service</div><div class="why-body">We respect your time. Most repairs are completed same-day — and we'll always give you an honest turnaround estimate upfront.</div></div>
+          <div>
+            <div class="why-title" data-en="Same-Day Service" data-fr="Service le jour même">Same-Day Service</div>
+            <div class="why-body" data-en="We respect your time. Most repairs are completed same-day — and we'll always give you an honest turnaround estimate upfront." data-fr="Nous respectons votre temps. La plupart des réparations sont effectuées le jour même — et nous vous donnons toujours une estimation honnête dès le départ.">We respect your time. Most repairs are completed same-day — and we'll always give you an honest turnaround estimate upfront.</div>
+          </div>
         </div>
         <div class="why-point">
           <div class="why-num">04</div>
-          <div><div class="why-title">4.9★ Google Rated</div><div class="why-body">489 reviews and counting. Our reputation is built one satisfied customer at a time — and we intend to keep it that way.</div></div>
+          <div>
+            <div class="why-title" data-en="4.9★ Google Rated" data-fr="4.9★ sur Google">4.9★ Google Rated</div>
+            <div class="why-body" data-en="489 reviews and counting. Our reputation is built one satisfied customer at a time — and we intend to keep it that way." data-fr="489 avis et ce n'est pas fini. Notre réputation se construit un client satisfait à la fois — et nous entendons la maintenir ainsi.">489 reviews and counting. Our reputation is built one satisfied customer at a time — and we intend to keep it that way.</div>
+          </div>
         </div>
       </div>
     </div>
     <div class="why-visual">
       <div class="why-box-bg">
-        <div class="why-ghost-text">EXPERT<br>CARE</div>
+        <div class="why-ghost-text" data-en="EXPERT<br>CARE" data-fr="EXPERT<br>SOIN">EXPERT<br>CARE</div>
       </div>
       <div class="why-box-red">
         <div class="big">4.9</div>
-        <div class="lbl">Google Rating</div>
+        <div class="lbl" data-en="Google Rating" data-fr="Note Google">Google Rating</div>
         <div class="divider"></div>
-        <div class="lbl">489 Reviews</div>
+        <div class="lbl" data-en="489 Reviews" data-fr="489 Avis">489 Reviews</div>
       </div>
     </div>
   </div>
@@ -344,46 +285,48 @@
 <section class="section reviews-section" id="reviews">
   <div class="reviews-header">
     <div>
-      <div class="section-label">What Customers Say</div>
-      <div class="section-title" style="margin-bottom:0;">Customer <span class="dim">Reviews</span></div>
+      <div class="section-label" data-en="What Customers Say" data-fr="Ce que disent nos clients">What Customers Say</div>
+      <div class="section-title" style="margin-bottom:0;">
+        <span data-en="Customer" data-fr="Avis">Customer</span> <span class="dim" data-en="Reviews" data-fr="Clients">Reviews</span>
+      </div>
     </div>
     <div class="rating-block">
       <div class="rating-big">4.9</div>
       <div>
         <div class="rating-stars">★★★★★</div>
-        <div class="rating-count">Based on 489 Google Reviews</div>
+        <div class="rating-count" data-en="Based on 489 Google Reviews" data-fr="Basé sur 489 avis Google">Based on 489 Google Reviews</div>
       </div>
     </div>
   </div>
   <div class="reviews-grid">
     <div class="review-card">
       <div class="review-stars">★★★★★</div>
-      <div class="review-text">Sammy's fixed my brake issue quickly and honestly. The price was fair, the work was excellent, and they explained everything clearly. Won't go anywhere else in Ottawa.</div>
+      <div class="review-text" data-en="Sammy's fixed my brake issue quickly and honestly. The price was fair, the work was excellent, and they explained everything clearly. Won't go anywhere else in Ottawa." data-fr="Sammy's a réparé mon problème de freins rapidement et honnêtement. Le prix était juste, le travail excellent et ils ont tout expliqué clairement. Je n'irai nulle part ailleurs à Ottawa.">Sammy's fixed my brake issue quickly and honestly. The price was fair, the work was excellent, and they explained everything clearly. Won't go anywhere else in Ottawa.</div>
       <div class="review-author"><div class="review-avatar">MK</div><div><div class="review-name">Mark K.</div><div class="review-date">Google Review</div></div></div>
     </div>
     <div class="review-card">
       <div class="review-stars">★★★★★</div>
-      <div class="review-text">Best auto shop in Ottawa. Brought my car for an oil change and they caught a serious coolant leak I had no idea about. Saved me a fortune. Honest, fast, professional.</div>
+      <div class="review-text" data-en="Best auto shop in Ottawa. Brought my car for an oil change and they caught a serious coolant leak I had no idea about. Saved me a fortune. Honest, fast, professional." data-fr="Meilleur atelier auto à Ottawa. Amené ma voiture pour une vidange et ils ont détecté une fuite de liquide de refroidissement sérieuse. M'ont sauvé une fortune. Honnête, rapide, professionnel.">Best auto shop in Ottawa. Brought my car for an oil change and they caught a serious coolant leak I had no idea about. Saved me a fortune. Honest, fast, professional.</div>
       <div class="review-author"><div class="review-avatar">SL</div><div><div class="review-name">Sarah L.</div><div class="review-date">Google Review</div></div></div>
     </div>
     <div class="review-card">
       <div class="review-stars">★★★★★</div>
-      <div class="review-text">A/C was repaired the same day I brought it in. The team is professional, knowledgeable, and genuinely cares about getting it right. Highly recommended!</div>
+      <div class="review-text" data-en="A/C was repaired the same day I brought it in. The team is professional, knowledgeable, and genuinely cares about getting it right. Highly recommended!" data-fr="La climatisation a été réparée le jour même. L'équipe est professionnelle, compétente et tient vraiment à bien faire le travail. Hautement recommandé !">A/C was repaired the same day I brought it in. The team is professional, knowledgeable, and genuinely cares about getting it right. Highly recommended!</div>
       <div class="review-author"><div class="review-avatar">JP</div><div><div class="review-name">James P.</div><div class="review-date">Google Review</div></div></div>
     </div>
     <div class="review-card">
       <div class="review-stars">★★★★★</div>
-      <div class="review-text">Took my Honda in for a full inspection before a road trip. They were thorough, found a worn belt I didn't know about, and had it fixed within hours. Absolute legends.</div>
+      <div class="review-text" data-en="Took my Honda in for a full inspection before a road trip. They were thorough, found a worn belt I didn't know about, and had it fixed within hours." data-fr="Amené ma Honda pour une inspection complète avant un voyage. Ils ont été minutieux, trouvé une courroie usée que je ne connaissais pas, et l'ont réparée en quelques heures.">Took my Honda in for a full inspection before a road trip. They were thorough, found a worn belt I didn't know about, and had it fixed within hours.</div>
       <div class="review-author"><div class="review-avatar">AH</div><div><div class="review-name">Aisha H.</div><div class="review-date">Google Review</div></div></div>
     </div>
     <div class="review-card">
       <div class="review-stars">★★★★★</div>
-      <div class="review-text">I've been going to Sammy's for 3 years. Every single time — honest, fair, fast. They remembered my car history without even having to ask. That's a real neighborhood shop.</div>
+      <div class="review-text" data-en="I've been going to Sammy's for 3 years. Every single time — honest, fair, fast. They remembered my car history without even having to ask." data-fr="Je vais chez Sammy's depuis 3 ans. Chaque fois — honnête, juste, rapide. Ils se souviennent de l'historique de ma voiture sans même avoir à demander.">I've been going to Sammy's for 3 years. Every single time — honest, fair, fast. They remembered my car history without even having to ask.</div>
       <div class="review-author"><div class="review-avatar">TR</div><div><div class="review-name">Tom R.</div><div class="review-date">Google Review</div></div></div>
     </div>
     <div class="review-card">
       <div class="review-stars">★★★★★</div>
-      <div class="review-text">Transmission job on my truck — quoted $400 less than the dealership and finished the same day. The quality was perfect. I'll never go back to the dealer for repairs again.</div>
+      <div class="review-text" data-en="Transmission job on my truck — quoted $400 less than the dealership and finished the same day. The quality was perfect." data-fr="Travail de transmission sur mon camion — devisé 400 $ de moins que le concessionnaire et terminé le même jour. La qualité était parfaite.">Transmission job on my truck — quoted $400 less than the dealership and finished the same day. The quality was perfect.</div>
       <div class="review-author"><div class="review-avatar">CB</div><div><div class="review-name">Chris B.</div><div class="review-date">Google Review</div></div></div>
     </div>
   </div>
@@ -392,50 +335,77 @@
 <!-- CTA -->
 <section class="cta-section" id="contact">
   <div class="cta-glow"></div>
-  <div class="section-label">Ready to Get Started?</div>
-  <h2>Book Your <span class="text-red">Appointment</span> Today</h2>
-  <p>Ottawa's most trusted auto repair shop — open Monday to Friday, 8 AM to 5 PM.</p>
+  <div class="section-label" data-en="Ready to Get Started?" data-fr="Prêt à commencer ?">Ready to Get Started?</div>
+  <h2 data-en="Book Your <span class='text-red'>Appointment</span> Today" data-fr="Prenez Votre <span class='text-red'>Rendez-vous</span> Aujourd'hui">Book Your <span class="text-red">Appointment</span> Today</h2>
+  <p data-en="Ottawa's most trusted auto repair shop — open Monday to Friday, 8 AM to 5 PM." data-fr="Le centre auto le plus fiable d'Ottawa — ouvert du lundi au vendredi, de 8 h à 17 h.">Ottawa's most trusted auto repair shop — open Monday to Friday, 8 AM to 5 PM.</p>
   <a href="tel:+16133276181" class="phone-cta">(613) 327-6181</a>
   <div class="cta-btns">
-    <a href="booking.html" class="btn-primary">Book Online</a>
-    <a href="https://maps.google.com/?q=2535+Blackwell+St,+Ottawa,+ON+K1B+4E4" target="_blank" class="btn-secondary">Get Directions</a>
+    <a href="booking.html" class="btn-primary" data-en="Book Online" data-fr="Réserver en ligne">Book Online</a>
+    <a href="https://maps.google.com/?q=2535+Blackwell+St,+Ottawa,+ON+K1B+4E4" target="_blank" class="btn-secondary" data-en="Get Directions" data-fr="Obtenir l'itinéraire">Get Directions</a>
   </div>
-  <div class="cta-address">2535 Blackwell St, Ottawa, ON K1B 4E4 &nbsp;·&nbsp; Mon–Fri: 8:00 AM – 5:00 PM</div>
+  <div class="cta-address" data-en="2535 Blackwell St, Ottawa, ON K1B 4E4 &nbsp;·&nbsp; Mon–Fri: 8:00 AM – 5:00 PM" data-fr="2535, rue Blackwell, Ottawa, ON K1B 4E4 &nbsp;·&nbsp; Lun–Ven : 8 h – 17 h">2535 Blackwell St, Ottawa, ON K1B 4E4 &nbsp;·&nbsp; Mon–Fri: 8:00 AM – 5:00 PM</div>
 </section>
 
 <!-- FOOTER -->
 <footer>
   <div class="footer-grid">
-      <div>
-        <img src="logo.png" alt="Sammy's Auto Repair Centre" style="height:60px; width:auto; object-fit:contain; filter:drop-shadow(0 0 6px rgba(200,16,46,0.3)); margin-bottom:14px; display:block;" />
-        <div class="footer-desc">Ottawa's trusted auto repair centre. Expert mechanics, honest prices, and exceptional service — every vehicle, every time.</div>
+    <div>
+      <img src="logo.png" alt="Sammy's Auto Repair Centre" style="height:60px;width:auto;object-fit:contain;filter:drop-shadow(0 0 6px rgba(200,16,46,0.3));margin-bottom:14px;display:block;" />
+      <div class="footer-desc" data-en="Ottawa's trusted auto repair centre. Expert mechanics, honest prices, and exceptional service — every vehicle, every time." data-fr="Le centre de réparation automobile de confiance d'Ottawa. Mécaniciens experts, prix honnêtes et service exceptionnel — chaque véhicule, chaque fois.">Ottawa's trusted auto repair centre. Expert mechanics, honest prices, and exceptional service — every vehicle, every time.</div>
     </div>
     <div>
-      <div class="footer-heading">Services</div>
+      <div class="footer-heading" data-en="Services" data-fr="Services">Services</div>
       <ul class="footer-links">
-        <li><a href="#services">Oil Change</a></li>
-        <li><a href="#services">Brake Repair</a></li>
-        <li><a href="#services">Engine Diagnostics</a></li>
-        <li><a href="#services">A/C Service</a></li>
-        <li><a href="#services">Transmission</a></li>
-        <li><a href="#services">Tire &amp; Alignment</a></li>
+        <li><a href="#services" data-en="Oil Change" data-fr="Vidange d'huile">Oil Change</a></li>
+        <li><a href="#services" data-en="Brake Repair" data-fr="Réparation de freins">Brake Repair</a></li>
+        <li><a href="#services" data-en="Engine Diagnostics" data-fr="Diagnostic moteur">Engine Diagnostics</a></li>
+        <li><a href="#services" data-en="A/C Service" data-fr="Service climatisation">A/C Service</a></li>
+        <li><a href="#services" data-en="Transmission" data-fr="Transmission">Transmission</a></li>
+        <li><a href="#services" data-en="Tire &amp; Alignment" data-fr="Pneus &amp; alignement">Tire &amp; Alignment</a></li>
       </ul>
     </div>
     <div>
-      <div class="footer-heading">Contact</div>
+      <div class="footer-heading" data-en="Contact" data-fr="Contact">Contact</div>
       <div class="footer-info">
-        2535 Blackwell St<br>
-        Ottawa, ON K1B 4E4<br><br>
+        2535 Blackwell St<br>Ottawa, ON K1B 4E4<br><br>
         <a href="tel:+16133276181">(613) 327-6181</a><br><br>
-        Mon–Fri: 8:00 AM – 5:00 PM
+        <span data-en="Mon–Fri: 8:00 AM – 5:00 PM" data-fr="Lun–Ven : 8 h – 17 h">Mon–Fri: 8:00 AM – 5:00 PM</span>
       </div>
     </div>
   </div>
   <div class="footer-bottom">
-    <div class="footer-copy">© 2025 Sammy's Auto Repair Centre. All rights reserved.</div>
-    <div class="google-badge"><span class="google-stars">★★★★★</span><span>4.9 / 5 on Google (489 reviews)</span></div>
+    <div class="footer-copy" data-en="© 2025 Sammy's Auto Repair Centre. All rights reserved." data-fr="© 2025 Centre de réparation automobile Sammy's. Tous droits réservés.">© 2025 Sammy's Auto Repair Centre. All rights reserved.</div>
+    <div class="google-badge"><span class="google-stars">★★★★★</span><span data-en="4.9 / 5 on Google (489 reviews)" data-fr="4,9 / 5 sur Google (489 avis)">4.9 / 5 on Google (489 reviews)</span></div>
   </div>
 </footer>
 
+<script>
+  let currentLang = localStorage.getItem('sammys-lang') || 'en';
+
+  function setLang(lang) {
+    currentLang = lang;
+    localStorage.setItem('sammys-lang', lang);
+    document.documentElement.lang = lang;
+
+    // Update all elements with data-en / data-fr
+    document.querySelectorAll('[data-en]').forEach(el => {
+      const val = el.getAttribute('data-' + lang);
+      if (val !== null) el.innerHTML = val;
+    });
+
+    // Toggle button states
+    document.querySelectorAll('.lang-btn').forEach(btn => {
+      btn.classList.toggle('active', btn.textContent.trim().toLowerCase() === lang);
+    });
+
+    // Update page title
+    document.title = lang === 'fr'
+      ? "Centre de réparation automobile Sammy's — Ottawa"
+      : "Sammy's Auto Repair Centre — Ottawa";
+  }
+
+  // Apply on load
+  setLang(currentLang);
+</script>
 </body>
 </html>
