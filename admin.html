@@ -8,6 +8,11 @@
   <style>
     body { background: #0D0D0D; padding: 0; }
 
+
+    .lang-toggle { display:flex; gap:0; border:1px solid rgba(255,255,255,0.15); overflow:hidden; margin:0 0 8px 0; }
+    .lang-btn { background:none; border:none; border-right:1px solid rgba(255,255,255,0.15); color:var(--gray); padding:6px 12px; font-family:'Barlow Condensed',sans-serif; font-size:11px; font-weight:700; letter-spacing:2px; cursor:pointer; transition:all 0.2s; }
+    .lang-btn:last-child { border-right:none; }
+    .lang-btn.active { background:var(--red); color:white; }
     /* ADMIN LAYOUT */
     .admin-wrap { display: flex; min-height: 100vh; }
 
@@ -276,20 +281,24 @@
   <aside class="admin-sidebar">
     <div class="sidebar-brand">
       <img src="logo.png" alt="Sammy's Auto Repair Centre" style="height:52px; width:auto; object-fit:contain; filter:drop-shadow(0 0 6px rgba(200,16,46,0.3)); margin-bottom:6px; display:block;" />
-      <div class="sub">Admin Dashboard</div>
+      <div class="sub" data-en="Admin Dashboard" data-fr="Tableau de bord">Admin Dashboard</div>
+      <div class="lang-toggle" style="margin-top:10px;">
+        <button class="lang-btn active" onclick="setLang('en')">EN</button>
+        <button class="lang-btn" onclick="setLang('fr')">FR</button>
+      </div>
     </div>
     <nav class="sidebar-nav">
       <div class="nav-section-label">Main</div>
-      <a class="nav-item active" href="#"><span class="icon">📊</span> Dashboard</a>
-      <a class="nav-item" href="#" onclick="showView('appointments')"><span class="icon">📅</span> Appointments <span class="nav-badge">7</span></a>
-      <a class="nav-item" href="#" onclick="showView('customers')"><span class="icon">👤</span> Customers</a>
-      <a class="nav-item" href="#" onclick="showView('services')"><span class="icon">🔧</span> Services</a>
+      <a class="nav-item active" href="#"><span class="icon">📊</span data-en="Dashboard" data-fr="Tableau de bord"> Dashboard</a>
+      <a class="nav-item" href="#" onclick="showView('appointments')"><span class="icon">📅</span data-en="Appointments" data-fr="Rendez-vous"> Appointments <span class="nav-badge">7</span></a>
+      <a class="nav-item" href="#" onclick="showView('customers')"><span class="icon">👤</span data-en="Customers" data-fr="Clients"> Customers</a>
+      <a class="nav-item" href="#" onclick="showView('services')"><span class="icon">🔧</span data-en="Services" data-fr="Services"> Services</a>
       <div class="nav-section-label">Reports</div>
-      <a class="nav-item" href="#"><span class="icon">💰</span> Revenue</a>
-      <a class="nav-item" href="#"><span class="icon">⭐</span> Reviews</a>
+      <a class="nav-item" href="#"><span class="icon">💰</span data-en="Revenue" data-fr="Revenus"> Revenue</a>
+      <a class="nav-item" href="#"><span class="icon">⭐</span data-en="Reviews" data-fr="Avis"> Reviews</a>
       <div class="nav-section-label">Settings</div>
-      <a class="nav-item" href="#"><span class="icon">⚙️</span> Settings</a>
-      <a class="nav-item" href="index.html" target="_blank"><span class="icon">🌐</span> View Website</a>
+      <a class="nav-item" href="#"><span class="icon">⚙️</span data-en="Settings" data-fr="Paramètres"> Settings</a>
+      <a class="nav-item" href="index.html" target="_blank"><span class="icon">🌐</span data-en="View Website" data-fr="Voir le site"> View Website</a>
     </nav>
     <div class="sidebar-user">
       <div class="user-avatar">SA</div>
@@ -306,12 +315,12 @@
     <!-- TOPBAR -->
     <div class="topbar">
       <div>
-        <div class="topbar-title">Dashboard <span>Overview</span></div>
+        <div class="topbar-title" data-en="Dashboard <span>Overview</span>" data-fr="Tableau de bord <span>Général</span>">Dashboard <span>Overview</span></div>
         <div class="topbar-date" id="today-date"></div>
       </div>
       <div class="topbar-actions">
-        <button class="btn-ghost" onclick="openModal()">+ New Appointment</button>
-        <button class="btn-primary" onclick="window.open('booking.html')">Open Booking Page ↗</button>
+        <button class="btn-ghost" onclick="openModal()"> data-en="+ New Appointment" data-fr="+ Nouveau RDV">+ New Appointment</button>
+        <button class="btn-primary" onclick="window.open('booking.html')" data-en="Open Booking Page ↗" data-fr="Ouvrir la page RDV ↗">Open Booking Page ↗</button>
       </div>
     </div>
 
@@ -319,27 +328,27 @@
     <div class="stat-grid">
       <div class="stat-card red">
         <div class="sc-icon">📅</div>
-        <div class="sc-label">Today's Appointments</div>
+        <div class="sc-label" data-en="Today's Appointments" data-fr="Rendez-vous aujourd'hui">Today's Appointments</div>
         <div class="sc-value">7</div>
-        <div class="sc-change up">↑ 2 from yesterday</div>
+        <div class="sc-change up"><span data-en="↑ 2 from yesterday" data-fr="↑ 2 par rapport à hier">↑ 2 from yesterday</span></div>
       </div>
       <div class="stat-card green">
         <div class="sc-icon">✅</div>
-        <div class="sc-label">Completed This Week</div>
+        <div class="sc-label" data-en="Completed This Week" data-fr="Complétés cette semaine">Completed This Week</div>
         <div class="sc-value">34</div>
-        <div class="sc-change up">↑ 12% vs last week</div>
+        <div class="sc-change up"><span data-en="↑ 12% vs last week" data-fr="↑ 12 % vs semaine dernière">↑ 12% vs last week</span></div>
       </div>
       <div class="stat-card yellow">
         <div class="sc-icon">⏳</div>
-        <div class="sc-label">Pending Confirmation</div>
+        <div class="sc-label" data-en="Pending Confirmation" data-fr="En attente de confirmation">Pending Confirmation</div>
         <div class="sc-value">4</div>
-        <div class="sc-change down">Needs attention</div>
+        <div class="sc-change down"><span data-en="Needs attention" data-fr="Attention requise">Needs attention</span></div>
       </div>
       <div class="stat-card blue">
         <div class="sc-icon">💰</div>
-        <div class="sc-label">Revenue This Month</div>
+        <div class="sc-label" data-en="Revenue This Month" data-fr="Revenus ce mois-ci">Revenue This Month</div>
         <div class="sc-value">$18.4k</div>
-        <div class="sc-change up">↑ 8% vs last month</div>
+        <div class="sc-change up"><span data-en="↑ 8% vs last month" data-fr="↑ 8 % vs mois dernier">↑ 8% vs last month</span></div>
       </div>
     </div>
 
@@ -350,10 +359,10 @@
       <div>
         <div class="panel">
           <div class="tab-bar">
-            <button class="tab-btn active" onclick="switchTab(this,'tab-today')">Today (7)</button>
-            <button class="tab-btn" onclick="switchTab(this,'tab-upcoming')">Upcoming</button>
-            <button class="tab-btn" onclick="switchTab(this,'tab-pending')">Pending (4)</button>
-            <button class="tab-btn" onclick="switchTab(this,'tab-done')">Completed</button>
+            <button class="tab-btn active" onclick="switchTab(this,'tab-today')" data-en="Today (7)" data-fr="Aujourd'hui (7)">Today (7)</button>
+            <button class="tab-btn" onclick="switchTab(this,'tab-upcoming')" data-en="Upcoming" data-fr="À venir">Upcoming</button>
+            <button class="tab-btn" onclick="switchTab(this,'tab-pending')" data-en="Pending (4)" data-fr="En attente (4)">Pending (4)</button>
+            <button class="tab-btn" onclick="switchTab(this,'tab-done')" data-en="Completed" data-fr="Complétés">Completed</button>
           </div>
           <div class="search-bar">
             <input class="search-input" type="text" placeholder="Search by name, service, or vehicle..." />
@@ -368,7 +377,7 @@
           <div class="tab-panel active" id="tab-today">
             <table class="data-table">
               <thead>
-                <tr><th>Time</th><th>Customer</th><th>Service</th><th>Vehicle</th><th>Status</th><th>Actions</th></tr>
+                <tr><th data-en="Time" data-fr="Heure">Time</th><th data-en="Customer" data-fr="Client">Customer</th><th data-en="Service" data-fr="Service">Service</th><th data-en="Vehicle" data-fr="Véhicule">Vehicle</th><th data-en="Status" data-fr="Statut">Status</th><th data-en="Actions" data-fr="Actions">Actions</th></tr>
               </thead>
               <tbody>
                 <tr>
@@ -434,7 +443,7 @@
           <!-- UPCOMING -->
           <div class="tab-panel" id="tab-upcoming">
             <table class="data-table">
-              <thead><tr><th>Date</th><th>Time</th><th>Customer</th><th>Service</th><th>Actions</th></tr></thead>
+              <thead><tr><th data-en="Date" data-fr="Date">Date</th><th>Time</th><th>Customer</th><th>Service</th><th>Actions</th></tr></thead>
               <tbody>
                 <tr><td>Tomorrow</td><td>8:30 AM</td><td>Peter N.</td><td>Oil Change + Filter</td><td><div class="td-actions"><button class="action-btn">View</button><button class="action-btn">Reschedule</button></div></td></tr>
                 <tr><td>Tomorrow</td><td>10:00 AM</td><td>Rachel G.</td><td>Brake Pads (Front)</td><td><div class="td-actions"><button class="action-btn">View</button><button class="action-btn">Reschedule</button></div></td></tr>
@@ -448,7 +457,7 @@
           <!-- PENDING -->
           <div class="tab-panel" id="tab-pending">
             <table class="data-table">
-              <thead><tr><th>Submitted</th><th>Customer</th><th>Service</th><th>Requested Date</th><th>Actions</th></tr></thead>
+              <thead><tr><th data-en="Submitted" data-fr="Soumis">Submitted</th><th>Customer</th><th>Service</th><th data-en="Requested Date" data-fr="Date souhaitée">Requested Date</th><th>Actions</th></tr></thead>
               <tbody>
                 <tr>
                   <td style="color:var(--gray);font-size:12px;">2 hrs ago</td>
@@ -499,7 +508,7 @@
         <!-- REVENUE CHART -->
         <div class="panel" style="margin-top:20px;">
           <div class="panel-header">
-            <div class="panel-title-sm">Monthly Revenue</div>
+            <div class="panel-title-sm" data-en="Monthly Revenue" data-fr="Revenus mensuels">Monthly Revenue</div>
             <select class="form-control" style="width:120px; padding:7px 12px; font-size:12px;">
               <option>2025</option><option>2024</option>
             </select>
@@ -535,7 +544,7 @@
 
         <!-- Services Breakdown -->
         <div class="panel">
-          <div class="panel-header"><div class="panel-title-sm">Services This Month</div></div>
+          <div class="panel-header"><div class="panel-title-sm" data-en="Services This Month" data-fr="Services ce mois-ci">Services This Month</div></div>
           <div class="quick-list">
             <div class="quick-item"><div class="qi-dot" style="background:var(--red);"></div><div class="qi-name">Oil Change</div><div><div class="qi-count">42</div><div class="qi-pct" style="text-align:right;">31%</div></div></div>
             <div class="quick-item"><div class="qi-dot" style="background:#E67E22;"></div><div class="qi-name">Brake Service</div><div><div class="qi-count">28</div><div class="qi-pct" style="text-align:right;">21%</div></div></div>
@@ -548,7 +557,7 @@
 
         <!-- Quick Contact -->
         <div class="panel">
-          <div class="panel-header"><div class="panel-title-sm">Shop Info</div></div>
+          <div class="panel-header"><div class="panel-title-sm" data-en="Shop Info" data-fr="Infos de l'atelier">Shop Info</div></div>
           <div style="padding:16px 20px;">
             <div style="font-size:13px; color:var(--gray); line-height:2.2;">
               <div>📍 <span style="color:var(--white);">2535 Blackwell St, Ottawa ON</span></div>
@@ -570,19 +579,19 @@
 <div class="modal-overlay" id="modal">
   <div class="modal">
     <div class="modal-header">
-      <div class="modal-title">New <span style="color:var(--red);">Appointment</span></div>
+      <div class="modal-title" data-en="New <span style='color:var(--red);'>Appointment</span>" data-fr="Nouveau <span style='color:var(--red);'>Rendez-vous</span>">New <span style="color:var(--red);">Appointment</span></div>
       <button class="modal-close" onclick="closeModal()">✕</button>
     </div>
     <div class="modal-body">
       <div class="form-row">
-        <div class="form-group"><label class="form-label">First Name</label><input class="form-control" type="text" placeholder="John" /></div>
-        <div class="form-group"><label class="form-label">Last Name</label><input class="form-control" type="text" placeholder="Smith" /></div>
+        <div class="form-group"><label class="form-label" data-en="First Name" data-fr="Prénom">First Name</label><input class="form-control" type="text" placeholder="John" /></div>
+        <div class="form-group"><label class="form-label" data-en="Last Name" data-fr="Nom">Last Name</label><input class="form-control" type="text" placeholder="Smith" /></div>
       </div>
       <div class="form-row">
-        <div class="form-group"><label class="form-label">Phone</label><input class="form-control" type="tel" placeholder="(613) 555-0000" /></div>
-        <div class="form-group"><label class="form-label">Email</label><input class="form-control" type="email" placeholder="john@email.com" /></div>
+        <div class="form-group"><label class="form-label" data-en="Phone" data-fr="Téléphone">Phone</label><input class="form-control" type="tel" placeholder="(613) 555-0000" /></div>
+        <div class="form-group"><label class="form-label" data-en="Email" data-fr="Courriel">Email</label><input class="form-control" type="email" placeholder="john@email.com" /></div>
       </div>
-      <div class="form-group"><label class="form-label">Service</label>
+      <div class="form-group"><label class="form-label" data-en="Service" data-fr="Service">Service</label>
         <select class="form-control">
           <option>Oil Change</option><option>Brake Service</option><option>Engine Diagnostics</option>
           <option>A/C Service</option><option>Tire &amp; Alignment</option><option>Transmission</option>
@@ -590,8 +599,8 @@
         </select>
       </div>
       <div class="form-row">
-        <div class="form-group"><label class="form-label">Date</label><input class="form-control" type="date" /></div>
-        <div class="form-group"><label class="form-label">Time</label>
+        <div class="form-group"><label class="form-label" data-en="Date" data-fr="Date">Date</label><input class="form-control" type="date" /></div>
+        <div class="form-group"><label class="form-label" data-en="Time" data-fr="Heure">Time</label>
           <select class="form-control">
             <option>8:00 AM</option><option>8:30 AM</option><option>9:00 AM</option><option>9:30 AM</option>
             <option>10:00 AM</option><option>10:30 AM</option><option>11:00 AM</option><option>11:30 AM</option>
@@ -601,14 +610,14 @@
         </div>
       </div>
       <div class="form-row">
-        <div class="form-group"><label class="form-label">Vehicle Make</label><input class="form-control" type="text" placeholder="Toyota" /></div>
-        <div class="form-group"><label class="form-label">Model &amp; Year</label><input class="form-control" type="text" placeholder="Camry 2021" /></div>
+        <div class="form-group"><label class="form-label" data-en="Vehicle Make" data-fr="Marque">Vehicle Make</label><input class="form-control" type="text" placeholder="Toyota" /></div>
+        <div class="form-group"><label class="form-label" data-en="Model &amp; Year" data-fr="Modèle &amp; Année">Model &amp; Year</label><input class="form-control" type="text" placeholder="Camry 2021" /></div>
       </div>
-      <div class="form-group"><label class="form-label">Notes</label><textarea class="form-control" rows="2" placeholder="Any additional notes..."></textarea></div>
+      <div class="form-group"><label class="form-label" data-en="Notes" data-fr="Notes">Notes</label><textarea class="form-control" rows="2" placeholder="Any additional notes..."></textarea></div>
     </div>
     <div class="modal-footer">
-      <button class="btn-ghost" onclick="closeModal()">Cancel</button>
-      <button class="btn-primary" onclick="alert('Appointment saved! Confirmation SMS will be sent.'); closeModal();">Save Appointment</button>
+      <button class="btn-ghost" onclick="closeModal()" data-en="Cancel" data-fr="Annuler">Cancel</button>
+      <button class="btn-primary" onclick="alert('Appointment saved! Confirmation SMS will be sent.'); closeModal();" data-en="Save Appointment" data-fr="Enregistrer">Save Appointment</button>
     </div>
   </div>
 </div>
@@ -671,5 +680,26 @@
 
   function showView(v) { console.log('Navigate to:', v); }
 </script>
+
+<script>
+  (function(){
+    var lang = localStorage.getItem('sammys-lang') || 'en';
+    function setLang(l) {
+      lang = l;
+      localStorage.setItem('sammys-lang', l);
+      document.documentElement.lang = l;
+      document.querySelectorAll('[data-en]').forEach(function(el) {
+        var v = el.getAttribute('data-' + l);
+        if (v !== null) el.innerHTML = v;
+      });
+      document.querySelectorAll('.lang-btn').forEach(function(btn) {
+        btn.classList.toggle('active', btn.textContent.trim().toLowerCase() === l);
+      });
+    }
+    window.setLang = setLang;
+    setLang(lang);
+  })();
+</script>
+
 </body>
 </html>
