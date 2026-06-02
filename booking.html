@@ -7,6 +7,11 @@
   <link rel="stylesheet" href="style.css" />
   <style>
     body { padding-top: 72px; }
+    .lang-toggle { display:flex; gap:0; border:1px solid rgba(255,255,255,0.15); overflow:hidden; }
+    .lang-btn { background:none; border:none; border-right:1px solid rgba(255,255,255,0.15); color:var(--gray); padding:7px 14px; font-family:'Barlow Condensed',sans-serif; font-size:12px; font-weight:700; letter-spacing:2px; cursor:pointer; transition:all 0.2s; }
+    .lang-btn:last-child { border-right:none; }
+    .lang-btn.active { background:var(--red); color:white; }
+    .lang-btn:hover:not(.active) { background:rgba(255,255,255,0.06); color:var(--white); }
 
     .page-hero {
       background: var(--dark);
@@ -248,18 +253,22 @@
 <nav>
   <a href="index.html" class="nav-logo"><img src="logo.png" alt="Sammy's Auto Repair Centre" /></a>
   <div class="nav-links">
-    <a href="index.html">Home</a>
-    <a href="index.html#services">Services</a>
-    <a href="index.html#reviews">Reviews</a>
-    <a href="booking.html" class="active">Book Online</a>
-    <a href="tel:+16133276181" class="nav-cta">☎ Call Now</a>
+    <a href="index.html" data-en="Home" data-fr="Accueil">Home</a>
+    <a href="index.html#services" data-en="Services" data-fr="Services">Services</a>
+    <a href="index.html#reviews" data-en="Reviews" data-fr="Avis">Reviews</a>
+    <a href="booking.html" class="active" data-en="Book Online" data-fr="Réserver">Book Online</a>
+    <div class="lang-toggle">
+      <button class="lang-btn active" onclick="setLang('en')">EN</button>
+      <button class="lang-btn" onclick="setLang('fr')">FR</button>
+    </div>
+    <a href="tel:+16133276181" class="nav-cta" data-en="☎ Call Now" data-fr="☎ Appelez">☎ Call Now</a>
   </div>
 </nav>
 
 <div class="page-hero">
-  <div class="page-hero-label">Online Booking</div>
-  <h1>Book an <span>Appointment</span></h1>
-  <p>Choose your service, pick a date and time, and we'll confirm within the hour.</p>
+  <div class="page-hero-label" data-en="Online Booking" data-fr="Réservation en ligne">Online Booking</div>
+  <h1 data-en="Book an <span>Appointment</span>" data-fr="Prendre un <span>Rendez-vous</span>">Book an <span>Appointment</span></h1>
+  <p data-en="Choose your service, pick a date and time, and we'll confirm within the hour." data-fr="Choisissez votre service, sélectionnez une date et une heure, et nous confirmerons dans l'heure.">Choose your service, pick a date and time, and we'll confirm within the hour.</p>
 </div>
 
 <!-- STEPS BAR -->
@@ -271,17 +280,17 @@
   <div class="step-connector"></div>
   <div class="step-item">
     <div class="step-circle" id="sc2">2</div>
-    <div class="step-label" id="sl2">Date &amp; Time</div>
+    <div class="step-label" id="sl2" data-en="Date &amp; Time" data-fr="Date &amp; Heure">Date &amp; Time</div>
   </div>
   <div class="step-connector"></div>
   <div class="step-item">
     <div class="step-circle" id="sc3">3</div>
-    <div class="step-label" id="sl3">Your Info</div>
+    <div class="step-label" id="sl3" data-en="Your Info" data-fr="Vos infos">Your Info</div>
   </div>
   <div class="step-connector"></div>
   <div class="step-item" style="flex:0;">
     <div class="step-circle" id="sc4">4</div>
-    <div class="step-label" id="sl4">Confirm</div>
+    <div class="step-label" id="sl4" data-en="Confirm" data-fr="Confirmer">Confirm</div>
   </div>
 </div>
 
@@ -290,8 +299,8 @@
 
     <!-- STEP 1: SERVICE -->
     <div class="form-panel active" id="panel1">
-      <div class="panel-title">Select a Service</div>
-      <div class="panel-sub">Choose the service you need. You can add notes in the next steps.</div>
+      <div class="panel-title" data-en="Select a Service" data-fr="Sélectionner un service">Select a Service</div>
+      <div class="panel-sub" data-en="Choose the service you need. You can add notes in the next steps." data-fr="Choisissez le service dont vous avez besoin. Vous pourrez ajouter des notes aux prochaines étapes.">Choose the service you need. You can add notes in the next steps.</div>
       <div class="service-select-grid">
         <div class="service-option" onclick="selectService(this,'Oil Change','~30 min')"><span class="so-icon">🛢️</span><div class="so-name">Oil Change</div><div class="so-time">~30 min</div></div>
         <div class="service-option" onclick="selectService(this,'Brake Service','~1–2 hrs')"><span class="so-icon">🔵</span><div class="so-name">Brake Service</div><div class="so-time">~1–2 hrs</div></div>
@@ -312,14 +321,14 @@
       </div>
       <div class="form-nav">
         <span></span>
-        <button class="btn-primary" onclick="goStep(2)">Next: Date &amp; Time →</button>
+        <button class="btn-primary" onclick="goStep(2)" data-en="Next: Date &amp; Time →" data-fr="Suivant : Date &amp; Heure →">Next: Date &amp; Time →</button>
       </div>
     </div>
 
     <!-- STEP 2: DATE & TIME -->
     <div class="form-panel" id="panel2">
-      <div class="panel-title">Pick a Date &amp; Time</div>
-      <div class="panel-sub">We're open Monday to Friday, 8:00 AM – 5:00 PM.</div>
+      <div class="panel-title" data-en="Pick a Date &amp; Time" data-fr="Choisir une date &amp; heure">Pick a Date &amp; Time</div>
+      <div class="panel-sub" data-en="We're open Monday to Friday, 8:00 AM – 5:00 PM." data-fr="Nous sommes ouverts du lundi au vendredi, de 8 h à 17 h.">We're open Monday to Friday, 8:00 AM – 5:00 PM.</div>
 
       <div class="cal-nav">
         <button class="cal-btn" onclick="changeMonth(-1)">‹</button>
@@ -333,21 +342,21 @@
         <div class="cal-header">Sat</div>
       </div>
 
-      <div class="time-label">Morning</div>
+      <div class="time-label" data-en="Morning" data-fr="Matin">Morning</div>
       <div class="time-slots" id="morning-slots"></div>
-      <div class="time-label">Afternoon</div>
+      <div class="time-label" data-en="Afternoon" data-fr="Après-midi">Afternoon</div>
       <div class="time-slots" id="afternoon-slots"></div>
 
       <div class="form-nav">
         <button class="btn-ghost" onclick="goStep(1)">← Back</button>
-        <button class="btn-primary" onclick="goStep(3)">Next: Your Info →</button>
+        <button class="btn-primary" onclick="goStep(3)" data-en="Next: Your Info →" data-fr="Suivant : Vos infos →">Next: Your Info →</button>
       </div>
     </div>
 
     <!-- STEP 3: CONTACT -->
     <div class="form-panel" id="panel3">
-      <div class="panel-title">Your Information</div>
-      <div class="panel-sub">We'll use this to confirm your appointment and send a reminder.</div>
+      <div class="panel-title" data-en="Your Information" data-fr="Vos informations">Your Information</div>
+      <div class="panel-sub" data-en="We'll use this to confirm your appointment and send a reminder." data-fr="Nous utiliserons ceci pour confirmer votre rendez-vous et envoyer un rappel.">We'll use this to confirm your appointment and send a reminder.</div>
 
       <div class="form-row">
         <div class="form-group"><label class="form-label">First Name *</label><input class="form-control" type="text" id="fname" placeholder="John" /></div>
@@ -375,25 +384,25 @@
 
       <div class="form-nav">
         <button class="btn-ghost" onclick="goStep(2)">← Back</button>
-        <button class="btn-primary" onclick="submitBooking()">Confirm Booking →</button>
+        <button class="btn-primary" onclick="submitBooking()" data-en="Confirm Booking →" data-fr="Confirmer →">Confirm Booking →</button>
       </div>
     </div>
 
     <!-- STEP 4: CONFIRMATION -->
     <div class="form-panel" id="panel4">
       <div class="confirm-icon">✓</div>
-      <div class="confirm-title">You're <span class="text-red">Booked!</span></div>
-      <div class="confirm-sub">Your appointment request has been received. We'll call or text to confirm within the hour.</div>
+      <div class="confirm-title" data-en="You're <span class='text-red'>Booked!</span>" data-fr="Vous êtes <span class='text-red'>Réservé !</span>">You're <span class="text-red">Booked!</span></div>
+      <div class="confirm-sub" data-en="Your appointment request has been received. We'll call or text to confirm within the hour." data-fr="Votre demande de rendez-vous a été reçue. Nous vous appellerons ou enverrons un SMS pour confirmer dans l'heure.">Your appointment request has been received. We'll call or text to confirm within the hour.</div>
       <div class="confirm-details">
-        <div class="confirm-row"><span class="key">Service</span><span class="val" id="conf-service">—</span></div>
-        <div class="confirm-row"><span class="key">Date</span><span class="val" id="conf-date">—</span></div>
-        <div class="confirm-row"><span class="key">Time</span><span class="val" id="conf-time">—</span></div>
+        <div class="confirm-row"><span class="key" data-en="Service" data-fr="Service">Service</span><span class="val" id="conf-service">—</span></div>
+        <div class="confirm-row"><span class="key" data-en="Date" data-fr="Date">Date</span><span class="val" id="conf-date">—</span></div>
+        <div class="confirm-row"><span class="key" data-en="Time" data-fr="Heure">Time</span><span class="val" id="conf-time">—</span></div>
         <div class="confirm-row"><span class="key">Name</span><span class="val" id="conf-name">—</span></div>
         <div class="confirm-row"><span class="key">Vehicle</span><span class="val" id="conf-vehicle">—</span></div>
         <div class="confirm-row"><span class="key">Phone</span><span class="val" id="conf-phone">—</span></div>
       </div>
       <div style="display:flex; gap:16px;">
-        <a href="index.html" class="btn-secondary">← Back to Home</a>
+        <a href="index.html" class="btn-secondary" data-en="← Back to Home" data-fr="← Retour à l'accueil">← Back to Home</a>
         <a href="tel:+16133276181" class="btn-primary">☎ Call Us</a>
       </div>
     </div>
@@ -401,22 +410,22 @@
   </div><!-- /booking-main -->
 
   <div class="booking-sidebar">
-    <div class="sidebar-title">Booking Summary</div>
+    <div class="sidebar-title" data-en="Booking Summary" data-fr="Récapitulatif">Booking Summary</div>
     <div class="summary-item"><span class="key">Service</span><span class="val" id="sum-service"><span class="empty">Not selected</span></span></div>
     <div class="summary-item"><span class="key">Date</span><span class="val" id="sum-date"><span class="empty">Not selected</span></span></div>
     <div class="summary-item"><span class="key">Time</span><span class="val" id="sum-time"><span class="empty">Not selected</span></span></div>
-    <div class="summary-item"><span class="key">Duration</span><span class="val" id="sum-duration"><span class="empty">TBD</span></span></div>
+    <div class="summary-item"><span class="key" data-en="Duration" data-fr="Durée">Duration</span><span class="val" id="sum-duration"><span class="empty">TBD</span></span></div>
 
     <div class="sidebar-note">
       Appointments are confirmed by phone or text. For urgent repairs, please call us directly.
     </div>
 
     <div class="sidebar-contact">
-      <div class="sidebar-title" style="margin-top:0;">Need Help?</div>
-      <div style="font-size:13px; color:var(--gray);">Call us anytime during business hours:</div>
+      <div class="sidebar-title" style="margin-top:0;" data-en="Need Help?" data-fr="Besoin d'aide ?">Need Help?</div>
+      <div style="font-size:13px; color:var(--gray);" data-en="Call us anytime during business hours:" data-fr="Appelez-nous pendant les heures d'ouverture :">Call us anytime during business hours:</div>
       <a href="tel:+16133276181" class="sidebar-phone">(613) 327-6181</a>
       <div style="margin-top:20px;">
-        <div class="sidebar-title">Hours</div>
+        <div class="sidebar-title" data-en="Hours" data-fr="Horaires">Hours</div>
         <div class="hours-row"><span class="day">Mon – Fri</span><span>8:00 AM – 5:00 PM</span></div>
         <div class="hours-row"><span class="day">Saturday</span><span style="color:rgba(136,136,136,0.5);">Closed</span></div>
         <div class="hours-row"><span class="day">Sunday</span><span style="color:rgba(136,136,136,0.5);">Closed</span></div>
@@ -581,6 +590,29 @@
 
   // Init calendar
   renderCalendar();
+</script>
+
+<script>
+  (function(){
+    var lang = localStorage.getItem('sammys-lang') || 'en';
+    function setLang(l) {
+      lang = l;
+      localStorage.setItem('sammys-lang', l);
+      document.documentElement.lang = l;
+      document.querySelectorAll('[data-en]').forEach(function(el) {
+        var v = el.getAttribute('data-' + l);
+        if (v !== null) el.innerHTML = v;
+      });
+      document.querySelectorAll('.lang-btn').forEach(function(btn) {
+        btn.classList.toggle('active', btn.textContent.trim().toLowerCase() === l);
+      });
+      document.title = l === 'fr'
+        ? "Réserver — Centre de réparation automobile Sammy's"
+        : "Book Appointment — Sammy's Auto Repair Centre";
+    }
+    window.setLang = setLang;
+    setLang(lang);
+  })();
 </script>
 </body>
 </html>
