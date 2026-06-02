@@ -1,0 +1,244 @@
+/* ============================================
+   SAMMY'S AUTO REPAIR CENTRE — Global Styles
+   ============================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&family=Barlow:wght@300;400;500;600&family=Barlow+Condensed:wght@400;600;700&display=swap');
+
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --red:          #C8102E;
+  --red-dark:     #8B0A1F;
+  --red-glow:     rgba(200, 16, 46, 0.2);
+  --silver:       #C0C0C0;
+  --silver-light: #E8E8E8;
+  --black:        #0A0A0A;
+  --dark:         #111111;
+  --dark2:        #1A1A1A;
+  --dark3:        #222222;
+  --gray:         #888888;
+  --gray-light:   #AAAAAA;
+  --white:        #F5F5F5;
+  --success:      #2ECC71;
+  --warning:      #F4C542;
+  --danger:       #E74C3C;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Barlow', sans-serif;
+  background: var(--black);
+  color: var(--white);
+  overflow-x: hidden;
+  line-height: 1.6;
+}
+
+/* ── NAV ── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 18px 48px;
+  background: rgba(10, 10, 10, 0.95);
+  border-bottom: 1px solid rgba(200, 16, 46, 0.3);
+  backdrop-filter: blur(12px);
+}
+.nav-logo {
+  font-family: 'Oswald', sans-serif;
+  font-size: 22px; font-weight: 700;
+  letter-spacing: 3px; text-transform: uppercase;
+  color: var(--white); text-decoration: none;
+}
+.nav-logo span { color: var(--red); }
+.nav-links { display: flex; gap: 32px; align-items: center; }
+.nav-links a {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 13px; font-weight: 600;
+  letter-spacing: 2px; text-transform: uppercase;
+  color: var(--silver); text-decoration: none;
+  transition: color 0.2s;
+}
+.nav-links a:hover, .nav-links a.active { color: var(--red); }
+.nav-cta {
+  background: var(--red) !important;
+  color: white !important;
+  padding: 10px 24px;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 12px; font-weight: 700;
+  letter-spacing: 2px; text-transform: uppercase;
+  text-decoration: none;
+  transition: background 0.2s, transform 0.15s;
+  display: inline-block;
+}
+.nav-cta:hover { background: var(--red-dark) !important; transform: translateY(-1px); }
+
+/* ── BUTTONS ── */
+.btn-primary {
+  background: var(--red);
+  color: white;
+  padding: 14px 32px;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 13px; font-weight: 700;
+  letter-spacing: 2px; text-transform: uppercase;
+  text-decoration: none; border: none; cursor: pointer;
+  display: inline-block;
+  transition: background 0.2s, transform 0.15s;
+}
+.btn-primary:hover { background: var(--red-dark); transform: translateY(-2px); }
+
+.btn-secondary {
+  color: var(--silver);
+  padding: 14px 32px;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 13px; font-weight: 600;
+  letter-spacing: 2px; text-transform: uppercase;
+  text-decoration: none; background: transparent;
+  border: 1px solid rgba(192, 192, 192, 0.3); cursor: pointer;
+  transition: border-color 0.2s, color 0.2s;
+  display: inline-block;
+}
+.btn-secondary:hover { border-color: var(--red); color: var(--red); }
+
+.btn-ghost {
+  color: var(--gray);
+  padding: 10px 20px;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 12px; font-weight: 600;
+  letter-spacing: 2px; text-transform: uppercase;
+  text-decoration: none; background: transparent;
+  border: 1px solid rgba(136, 136, 136, 0.2); cursor: pointer;
+  transition: all 0.2s;
+}
+.btn-ghost:hover { color: var(--white); border-color: rgba(136,136,136,0.5); }
+
+/* ── SECTION HELPERS ── */
+.section { padding: 100px 48px; }
+.section-label {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 11px; font-weight: 700;
+  letter-spacing: 4px; text-transform: uppercase;
+  color: var(--red); margin-bottom: 14px;
+}
+.section-title {
+  font-family: 'Oswald', sans-serif;
+  font-size: clamp(34px, 5vw, 54px);
+  font-weight: 700; text-transform: uppercase;
+  line-height: 1; margin-bottom: 56px;
+}
+.section-title .dim { color: rgba(245, 245, 245, 0.2); }
+
+/* ── MARQUEE ── */
+.marquee-strip {
+  background: var(--red); padding: 14px 0;
+  overflow: hidden; white-space: nowrap;
+}
+.marquee-inner {
+  display: inline-flex;
+  animation: marquee 22s linear infinite;
+}
+.marquee-item {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 13px; font-weight: 700;
+  letter-spacing: 3px; text-transform: uppercase;
+  color: white; padding: 0 40px;
+}
+.marquee-dot { color: rgba(255,255,255,0.45); padding: 0 8px; }
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+/* ── FOOTER ── */
+footer {
+  background: var(--dark);
+  border-top: 1px solid rgba(255,255,255,0.07);
+  padding: 60px 48px 32px;
+}
+.footer-grid {
+  display: grid; grid-template-columns: 2fr 1fr 1fr;
+  gap: 48px; margin-bottom: 48px;
+}
+.footer-logo {
+  font-family: 'Oswald', sans-serif;
+  font-size: 22px; font-weight: 700;
+  letter-spacing: 3px; text-transform: uppercase;
+  color: var(--white); margin-bottom: 14px;
+}
+.footer-logo span { color: var(--red); }
+.footer-desc { font-size: 14px; color: var(--gray); line-height: 1.75; max-width: 300px; }
+.footer-heading {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 11px; font-weight: 700;
+  letter-spacing: 3px; text-transform: uppercase;
+  color: var(--red); margin-bottom: 18px;
+}
+.footer-links { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+.footer-links li a { font-size: 14px; color: var(--gray); text-decoration: none; transition: color 0.2s; }
+.footer-links li a:hover { color: var(--white); }
+.footer-info { font-size: 14px; color: var(--gray); line-height: 2.1; }
+.footer-info a { color: var(--red); text-decoration: none; }
+.footer-bottom {
+  border-top: 1px solid rgba(255,255,255,0.07);
+  padding-top: 24px;
+  display: flex; justify-content: space-between; align-items: center;
+}
+.footer-copy { font-size: 12px; color: rgba(136,136,136,0.55); letter-spacing: 1px; }
+.google-badge { display: flex; align-items: center; gap: 8px; font-size: 12px; color: var(--gray); }
+.google-stars { color: var(--warning); font-size: 14px; }
+
+/* ── FORMS ── */
+.form-group { display: flex; flex-direction: column; gap: 8px; margin-bottom: 20px; }
+.form-label {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 11px; font-weight: 700;
+  letter-spacing: 2px; text-transform: uppercase;
+  color: var(--gray-light);
+}
+.form-control {
+  background: var(--dark2);
+  border: 1px solid rgba(255,255,255,0.1);
+  color: var(--white);
+  padding: 13px 16px;
+  font-family: 'Barlow', sans-serif;
+  font-size: 15px;
+  outline: none;
+  transition: border-color 0.2s;
+  width: 100%;
+}
+.form-control:focus { border-color: var(--red); }
+.form-control::placeholder { color: var(--gray); }
+select.form-control { appearance: none; cursor: pointer; }
+
+/* ── BADGES ── */
+.badge {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 10px; font-weight: 700;
+  letter-spacing: 1.5px; text-transform: uppercase;
+  padding: 4px 10px; display: inline-block;
+}
+.badge-red    { background: rgba(200,16,46,0.2);  color: #FF6B6B; }
+.badge-green  { background: rgba(46,204,113,0.15); color: var(--success); }
+.badge-yellow { background: rgba(244,197,66,0.15); color: var(--warning); }
+.badge-gray   { background: rgba(136,136,136,0.15); color: var(--gray); }
+
+/* ── UTILITY ── */
+.text-red    { color: var(--red); }
+.text-gray   { color: var(--gray); }
+.text-silver { color: var(--silver); }
+.mt-1  { margin-top: 8px; }
+.mt-2  { margin-top: 16px; }
+.mt-3  { margin-top: 24px; }
+.mt-4  { margin-top: 32px; }
+.flex  { display: flex; }
+.gap-2 { gap: 16px; }
+.gap-3 { gap: 24px; }
+.items-center { align-items: center; }
+.justify-between { justify-content: space-between; }
+
+@media (max-width: 768px) {
+  nav { padding: 14px 20px; }
+  .nav-links { gap: 16px; }
+  .nav-links a:not(.nav-cta) { display: none; }
+  .section { padding: 64px 20px; }
+  .footer-grid { grid-template-columns: 1fr; gap: 32px; }
+}
